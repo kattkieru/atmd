@@ -16,40 +16,42 @@
  * package.
  */
 
-#include <windows.h>
+#ifndef __APPLE__
+  #include <windows.h>
+#endif
 
 void Directory(char path[])
 {
-    char subpath[_MAX_PATH];
-    char temp[_MAX_PATH];
-    WIN32_FIND_DATA lp;
+//     char subpath[_MAX_PATH];
+//     char temp[_MAX_PATH];
+//     WIN32_FIND_DATA lp;
 
-    strcpy(temp,path);
-    HANDLE h=FindFirstFile(temp,&lp);
+//     strcpy(temp,path);
+//     HANDLE h=FindFirstFile(temp,&lp);
 
-    temp[strlen(temp)-1]='\0';//*を消している
-    do
-    {      
-//        if((lp.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-//            && strcmp(lp.cFileName,"..")!=0 && strcmp(lp.cFileName,".")!=0)
-//        {            
-//           //subpathでディレクトリのフルパスが分かる
-//            wsprintf(subpath,"%s%s\\*",temp,lp.cFileName);
-//            Directory(subpath);
-//        }
-//        if((lp.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)!=FILE_ATTRIBUTE_DIRECTORY)
-//        {
-//           // lp.cFilenameでファイル名が分かる
-//           // wsprintf(出力文字列,"%s%s",temp,lp.cFileName);とすれば
-//           // ファイルのフルパスが分かる
-//
-//           //こちらはファイルサイズ
-//           //size+=lp.nFileSizeHigh*MAXDWORD+lp.nFileSizeLow ;
-//           
-//        }        
-    } while(FindNextFile(h,&lp));
+//     temp[strlen(temp)-1]='\0';//*を消している
+//     do
+//     {      
+// //        if((lp.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+// //            && strcmp(lp.cFileName,"..")!=0 && strcmp(lp.cFileName,".")!=0)
+// //        {            
+// //           //subpathでディレクトリのフルパスが分かる
+// //            wsprintf(subpath,"%s%s\\*",temp,lp.cFileName);
+// //            Directory(subpath);
+// //        }
+// //        if((lp.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)!=FILE_ATTRIBUTE_DIRECTORY)
+// //        {
+// //           // lp.cFilenameでファイル名が分かる
+// //           // wsprintf(出力文字列,"%s%s",temp,lp.cFileName);とすれば
+// //           // ファイルのフルパスが分かる
+// //
+// //           //こちらはファイルサイズ
+// //           //size+=lp.nFileSizeHigh*MAXDWORD+lp.nFileSizeLow ;
+// //           
+// //        }        
+//     } while(FindNextFile(h,&lp));
  
-        FindClose(h);
+//         FindClose(h);
 }
 
 char **fname;
@@ -65,72 +67,72 @@ char **get_file_list(int *num, char *ext)
 {
    char **flist;
    flist = (char **) malloc(4);
-//   flist[0] = strdup("foobar");
-//   *num = 1;
-//   return flist;
+  flist[0] = _strdup("foobar");
+  *num = 1;
+  return flist;
 
 
-//   char *str;
-   char str[1024];
-   int n;
+// //   char *str;
+//    char str[1024];
+//    int n;
 
-//   flist = NULL;
-//   dp = opendir(".");
+// //   flist = NULL;
+// //   dp = opendir(".");
 
-    char temp[_MAX_PATH];
-    WIN32_FIND_DATA lp;
-    wsprintfA(temp,"*%s", ext);
-    HANDLE h=FindFirstFile(temp,&lp);
+//     char temp[_MAX_PATH];
+//     WIN32_FIND_DATA lp;
+//     wsprintfA(temp,"*%s", ext);
+//     HANDLE h=FindFirstFile(temp,&lp);
 
-	n = 0;
+// 	n = 0;
 
-    do
-    {
-//        if((lp.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-//            && strcmp(lp.cFileName,"..")!=0 && strcmp(lp.cFileName,".")!=0)
-//        {            
-//           //subpathでディレクトリのフルパスが分かる
-//            wsprintf(subpath,"%s%s\\*",temp,lp.cFileName);
-//            Directory(subpath);
-//        }
-        if((lp.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)!=FILE_ATTRIBUTE_DIRECTORY)
-        {
-			wsprintfA(str, "%s", lp.cFileName);
-			flist = (char **) realloc((void *)flist, (n+1)*sizeof(char *));
-			flist[n++] = strdup(str);
-//           // lp.cFilenameでファイル名が分かる
-//           // wsprintf(出力文字列,"%s%s",temp,lp.cFileName);とすれば
-//           // ファイルのフルパスが分かる
-//
-//           //こちらはファイルサイズ
-//           //size+=lp.nFileSizeHigh*MAXDWORD+lp.nFileSizeLow ;
-//           
-        }
-    } while(FindNextFile(h, &lp));
+//     do
+//     {
+// //        if((lp.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+// //            && strcmp(lp.cFileName,"..")!=0 && strcmp(lp.cFileName,".")!=0)
+// //        {            
+// //           //subpathでディレクトリのフルパスが分かる
+// //            wsprintf(subpath,"%s%s\\*",temp,lp.cFileName);
+// //            Directory(subpath);
+// //        }
+//         if((lp.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)!=FILE_ATTRIBUTE_DIRECTORY)
+//         {
+// 			wsprintfA(str, "%s", lp.cFileName);
+// 			flist = (char **) realloc((void *)flist, (n+1)*sizeof(char *));
+// 			flist[n++] = strdup(str);
+// //           // lp.cFilenameでファイル名が分かる
+// //           // wsprintf(出力文字列,"%s%s",temp,lp.cFileName);とすれば
+// //           // ファイルのフルパスが分かる
+// //
+// //           //こちらはファイルサイズ
+// //           //size+=lp.nFileSizeHigh*MAXDWORD+lp.nFileSizeLow ;
+// //           
+//         }
+//     } while(FindNextFile(h, &lp));
  
-	FindClose(h);
+// 	FindClose(h);
 
-//   for (n = 0;;)
-//   {
-////      d = readdir(dp);
-//      if (!d)
-//         break;
-//
-////      str = d->d_name;
-//	  str = "abc";
-//
-//      if (strstr(str, ext))
-//      {
-//         flist = (char **) realloc((void *)flist, (n+1)*sizeof(char *));
-//         flist[n++] = strdup(str);
-//      }
-//   }
-//
-////   closedir(dp);
+// //   for (n = 0;;)
+// //   {
+// ////      d = readdir(dp);
+// //      if (!d)
+// //         break;
+// //
+// ////      str = d->d_name;
+// //	  str = "abc";
+// //
+// //      if (strstr(str, ext))
+// //      {
+// //         flist = (char **) realloc((void *)flist, (n+1)*sizeof(char *));
+// //         flist[n++] = strdup(str);
+// //      }
+// //   }
+// //
+// ////   closedir(dp);
 
-   *num = n;
+//    *num = n;
 
-   return flist;
+//    return flist;
 }
 
 void clear_file_list(int num, char **flist)
