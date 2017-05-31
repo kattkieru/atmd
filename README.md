@@ -1,6 +1,18 @@
 # Affinix Tile/Map Designer
 by Hideaki Omuro
 
+I was curious about this, so I've added a build script and embedded
+SDL 1.2.15 in the repo.  It builds and starts, but I have no idea 
+yet how to use it.
+
+## Building
+~~~~
+mkdir build
+cd build
+cmake ..
+cmake --build .
+~~~~
+
 ## Usage
 `atmd file.ats file.amp [/T:tile.bin] [/M:map.bin] [/P:file.pal]`
 
