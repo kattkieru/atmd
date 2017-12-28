@@ -1,5 +1,6 @@
 # Affinix Tile/Map Designer
 by Hideaki Omuro
+New modifications by kiki (github.com/kattkieru)
 
 I was curious about this, so I've added a build script and embedded
 SDL 1.2.15 in the repo.  It builds and starts, but I have no idea 
